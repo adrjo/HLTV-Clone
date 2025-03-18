@@ -19,7 +19,7 @@ body {
 }
 
 .main {
-    display:flex;
+    display: flex;
     flex: calc(3/4 * 100%);
 }
 
@@ -27,6 +27,10 @@ body {
 .nav {
     padding-left: 1rem;
     padding-right: 2rem;
+}
+
+.logo-sm {
+    width: 3rem;
 }
 
 a:hover {
@@ -52,12 +56,12 @@ a:hover {
     height: fit-content;
 
 
-    display:flex;
+    display: flex;
     flex: calc(1/4 * 100%);
     flex-direction: column;
 }
 
-.sidebar > a:nth-last-child(1) {
+.sidebar>a:nth-last-child(1) {
     border-bottom: none;
 }
 
@@ -72,9 +76,9 @@ a:hover {
 
 @media (min-width: 768px) {
     .container {
-      max-width: 768px;
+        max-width: 768px;
     }
-  }
+}
 
 @media screen and (max-width: 768px) {
     .main {
@@ -82,8 +86,8 @@ a:hover {
     }
 
     .sidebar {
-        width:80%;
-        margin:auto;
+        width: 80%;
+        margin: auto;
         margin-bottom: 1.25rem;
     }
 }
