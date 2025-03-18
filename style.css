@@ -18,11 +18,11 @@ body {
     padding-right: .5rem;
 }
 
-@media (min-width: 768px) {
-    .container {
-      max-width: 768px;
-    }
-  }
+.main {
+    display:flex;
+    flex: calc(3/4 * 100%);
+}
+
 
 .nav {
     padding-left: 1rem;
@@ -50,6 +50,11 @@ a:hover {
 .sidebar {
     border-radius: 0.25rem;
     height: fit-content;
+
+
+    display:flex;
+    flex: calc(1/4 * 100%);
+    flex-direction: column;
 }
 
 .sidebar > a:nth-last-child(1) {
@@ -62,4 +67,23 @@ a:hover {
 
 .score {
     font-weight: 900;
+}
+
+
+@media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+
+@media screen and (max-width: 768px) {
+    .main {
+        display: block;
+    }
+
+    .sidebar {
+        width:80%;
+        margin:auto;
+        margin-bottom: 1.25rem;
+    }
 }
