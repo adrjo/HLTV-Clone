@@ -46,3 +46,20 @@ a:hover {
     min-width: 100px;
     text-align: right;
 }
+
+.sidebar {
+    border-radius: 0.25rem;
+    height: fit-content;
+}
+
+.sidebar > a:nth-last-child(1) {
+    border-bottom: none;
+}
+
+.team {
+    font-weight: 500;
+}
+
+.score {
+    font-weight: 900;
+}
