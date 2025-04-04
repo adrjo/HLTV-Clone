@@ -1,0 +1,32 @@
+.article > h1 {
+    border-bottom: 1px solid gray;
+}
+
+.article > span {
+    margin: 1rem 0;
+    display: block;
+}
+
+.article img {
+    max-width: 600px;
+    width: 100%;
+    margin:auto;
+}
+
+.article ul {
+    margin: 1rem 0 1rem 2rem;
+}
+
+.article a {
+    color:lightblue;
+}
+
+@media screen and (max-width: 500px) {
+    .article img {
+        display: none;
+    }
+
+    .article > h1 {
+        font-size: 2rem;
+    }
+}
