@@ -119,7 +119,7 @@ button:hover {
 }
 
 
-#toasted {
+#formed {
     width:30vw;
     background-color:#364153;
     text-align: center;
@@ -138,12 +138,12 @@ button:hover {
     gap: 1rem;
 }
 
-#toasted :nth-child(n) {
+#formed :nth-child(n) {
     padding: 0.25rem;
     margin: auto;
     width: 20rem;
 }
 
-#toasted :not(button) {
+#formed :not(button) {
     background-color: #1b1f23;
 }
