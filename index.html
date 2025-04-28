@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/main.js" defer type="module"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/news.css">
     <!--fontawesome icons-->
@@ -34,10 +35,22 @@
         </div>
     </header>
 
+    <div id="toasted" style="display: none;">
+        <h2>New Post</h2>
+        <input type="text" placeholder="Title" class="self-center">
+        <input type="text" placeholder="Author" class="self-center">
+        <textarea class="self-center"></textarea>
+
+        <button id="cancel" type="submit" class="bg-red-400 text-black">Cancel</button>
+        <button id="submit_post" type="submit" class="bg-green-400 text-black">Submit</button>
+    </div>
+
     <main class="bg-[#1b1f23] container-thing main">
 
         <div class="mr-1 mb-5">
             <h1 class="font-semibold text-3xl mt-5 mb-5 text-center">Counter-Strike News</h1>
+
+            <button id="new_post" class="bg-green-400 m-5 p-3 text-black">New Post</button>
 
             <a href="article" class="news-button bg-gray-700 flex gap-2 items-center shadow-2xs mb-0.5">
                 <div>NAVI upset G2</div> <!-- title -->
