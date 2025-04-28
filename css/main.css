@@ -19,7 +19,6 @@ body {
 
 .main {
     display: flex;
-    flex: calc(3/4 * 100%);
 }
 
 

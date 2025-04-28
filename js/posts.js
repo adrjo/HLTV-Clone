@@ -47,6 +47,8 @@ export function renderPosts() {
     const posts = JSON.parse(localStorage.getItem("posts"));
     const postsContainer = document.getElementById("content");
 
+    postsContainer.innerHTML = "";
+
     let currentDay = new Date(Date.now()).getDate();
     for (const post of posts) {
         let postDate = new Date(post.date);
