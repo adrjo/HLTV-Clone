@@ -35,6 +35,7 @@ export function submitPost(event) {
         clearForms(title, author, content);
         hideForm(event);
         displayToast("✅ Successfully created post " + post.title, 5);
+        renderPosts();
     } catch(error) {
         displayToast("❌ Error creating post", 5);
     }
@@ -45,11 +46,19 @@ export function submitPost(event) {
 //TODO: load posts from api instead of localstorage
 export function renderPosts() {
     const posts = JSON.parse(localStorage.getItem("posts"));
+
     const postsContainer = document.getElementById("content");
 
     postsContainer.innerHTML = "";
 
-    let currentDay = new Date(Date.now()).getDate();
+    if (posts == null) {
+        return;
+    }
+    
+    // newest posts first
+    posts.sort((a, b) => b.date - a.date);
+
+    let currentDay = -1;
     for (const post of posts) {
         let postDate = new Date(post.date);
         if (postDate.getDate() != currentDay) {
@@ -92,7 +101,7 @@ function createDateHeading(postDate) {
 
 function createPost(post) {
     let container = document.createElement("a");
-    container.href = "/article/" + post.id;
+    container.href = "article/" + post.id;
     container.classList.add("news-button", "bg-gray-700", "flex", "gap-2", "items-center", "shadow-2xs", "mb-0.5");
 
     let h2 = document.createElement("h2");
