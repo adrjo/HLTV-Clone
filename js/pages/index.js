@@ -1,5 +1,5 @@
-import { displayForm, hideForm } from "./forms.js";
-import { submitPost, renderPosts } from "./posts.js";
+import { displayForm, hideForm } from "../forms.js";
+import { submitPost, renderPosts } from "../posts.js";
 
 // New post
 const newPostButton = document.getElementById("new_post");
