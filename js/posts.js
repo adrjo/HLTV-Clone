@@ -1,5 +1,5 @@
 import { hideForm } from "./forms";
-import { clearForms } from "./utils";
+import { clearForms, displayToast } from "./utils";
 
 class Post {
     static lastId = 0;
@@ -23,15 +23,20 @@ export function submitPost(event) {
     //TODO: replace with call to API to save a post.
     let posts = [];
 
-    if (localStorage.getItem("posts") != null) {
-        posts = JSON.parse(localStorage.getItem("posts"));
+    try {
+        if (localStorage.getItem("posts") != null) {
+            posts = JSON.parse(localStorage.getItem("posts"));
+        }
+
+        posts.push(post);
+
+        localStorage.setItem("posts", JSON.stringify(posts));
+
+        // clear and hide the form
+        clearForms(title, author, content);
+        hideForm(event);
+        displayToast("✅ Successfully created post " + post.title, 5);
+    } catch(error) {
+        displayToast("❌ Error creating post", 5);
     }
-
-    posts.push(post);
-
-    localStorage.setItem("posts", JSON.stringify(posts));
-
-    // clear and hide the form
-    clearForms(title, author, content);
-    hideForm(event);
 }

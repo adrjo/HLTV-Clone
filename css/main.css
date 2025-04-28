@@ -147,3 +147,18 @@ button:hover {
 #formed :not(button) {
     background-color: #1b1f23;
 }
+
+#toastsContainer {
+    position: fixed;
+    right:0;
+    bottom:0;
+    width: fit-content;
+    margin:2px;
+}
+
+#toastsContainer > div {
+    padding:2rem;
+    margin-top: .25rem;
+    background-color: #364153;
+    border: 1px solid black;
+}
