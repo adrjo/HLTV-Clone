@@ -1,5 +1,5 @@
 import { displayForm, hideForm } from "./forms.js";
-import { submitPost } from "./posts.js";
+import { submitPost, renderPosts } from "./posts.js";
 
 // New post
 const newPostButton = document.getElementById("new_post");
@@ -17,5 +17,5 @@ const submitButton = document.getElementById("submit_post");
 submitButton.addEventListener("click", submitPost);
 
 // load posts 
-
+renderPosts();
 

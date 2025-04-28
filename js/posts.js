@@ -2,9 +2,8 @@ import { hideForm } from "./forms";
 import { clearForms, displayToast } from "./utils";
 
 class Post {
-    static lastId = 0;
     constructor(title, author, content) {
-        this.id = Post.lastId++; // TODO: when API: get id from database
+        this.id = crypto.randomUUID(); // TODO: when API: get id from database
         this.title = title;
         this.author = author;
         this.content = content;
@@ -15,7 +14,7 @@ class Post {
 export function submitPost(event) {
     const title = document.getElementById("title");
     const author = document.getElementById("author");
-    const content = document.getElementById("content");
+    const content = document.getElementById("post_content");
 
 
     let post = new Post(title.value, author.value, content.value);
@@ -38,5 +37,14 @@ export function submitPost(event) {
         displayToast("✅ Successfully created post " + post.title, 5);
     } catch(error) {
         displayToast("❌ Error creating post", 5);
+    }
+}
+
+//TODO: load posts from api instead of localstorage
+export function renderPosts() {
+    const posts = JSON.parse(localStorage.getItem("posts"));
+
+    for (const post of posts) {
+        console.log(post);
     }
 }
