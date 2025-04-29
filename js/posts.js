@@ -62,7 +62,7 @@ export function renderPost(post) {
     const contentContainer = document.getElementById("content");
 
     let articleContainer = document.createElement("div");
-    articleContainer.classList.add("article", "mr-1", "mb-5");
+    articleContainer.classList.add("article", "flex-3/4", "mr-1", "mb-5");
 
     let title = document.createElement("h1");
     title.append(post.title);
