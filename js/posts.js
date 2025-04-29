@@ -2,9 +2,10 @@ import { hideForm } from "./forms";
 import { clearForms, displayToast, getElapsedTimeFormatted } from "./utils";
 
 class Post {
-    constructor(title, author, content) {
+    constructor(title, imgLink, author, content) {
         this.id = crypto.randomUUID(); // TODO: when API: get id from database
         this.title = title;
+        this.imgLink = imgLink;
         this.author = author;
         this.content = content;
         this.date = Date.now();
@@ -14,10 +15,11 @@ class Post {
 export function submitPost(event) {
     const title = document.getElementById("title");
     const author = document.getElementById("author");
+    const imgLink = document.getElementById("image");
     const content = document.getElementById("post_content");
 
 
-    let post = new Post(title.value, author.value, content.value);
+    let post = new Post(title.value, imgLink.value, author.value, content.value);
 
     //TODO: replace with call to API to save a post.
     let posts = [];
@@ -32,7 +34,7 @@ export function submitPost(event) {
         localStorage.setItem("posts", JSON.stringify(posts));
 
         // clear and hide the form
-        clearForms(title, author, content);
+        clearForms(title, author, imgLink, content);
         hideForm(event);
         displayToast("✅ Successfully created post " + post.title, 5);
         renderPosts();
@@ -81,13 +83,18 @@ export function renderPost(post) {
 
     authorDate.append(author, date);
 
-    /*let img = document.createElement("img");
+    
+    let img = document.createElement("img");
     img.src = post.imgLink;
-    img.classList.add("border-black-1", "p-4");*/
+    img.classList.add("border-black-1", "p-4");
 
     const content = createContentSection(post.content);
 
-    articleContainer.append(title, authorDate, content);
+    articleContainer.append(title, authorDate);
+    if (post.imgLink != undefined) {
+        articleContainer.append(img);
+    }
+    articleContainer.append(content);
 
     contentContainer.prepend(articleContainer);
 }
@@ -105,10 +112,20 @@ function createContentSection(contentData) {
 
     // split into spans
     const sections = contentData.split("\n\n");
-    
-    for (const section of sections) {
+
+    for (let section of sections) {
         let span = document.createElement("span");
-        span.append(section);
+
+        if (section.includes("\n")) { // single line breaks
+            let newLines = section.split("\n");
+
+            for (const line of newLines) {
+                span.append(line);
+                span.append(document.createElement("br"));
+            }
+        } else {
+            span.append(section);
+        }
         contentDiv.append(span);
     }
 
