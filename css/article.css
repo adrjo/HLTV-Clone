@@ -2,7 +2,7 @@
     border-bottom: 1px solid gray;
 }
 
-.article > span {
+.article span {
     margin: 1rem 0;
     display: block;
 }

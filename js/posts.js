@@ -94,7 +94,25 @@ export function renderPost(post) {
 
 // automatically split sections up into spans via newline chars, automatic links, create lists via star * and -, make bold/italic via [b]/[i] codes, maybe [spoiler] tag support too?
 function createContentSection(contentData) {
-    console.log(contentData);
+    if (contentData == undefined || contentData == "") {
+        return "";
+    }
+
+    let contentDiv = document.createElement("div");
+
+    //inline styling (bold, italic, spoiler)
+    //const styled = inlineStyling() //TODO, for now just splitting into spans is enough.
+
+    // split into spans
+    const sections = contentData.split("\n\n");
+    
+    for (const section of sections) {
+        let span = document.createElement("span");
+        span.append(section);
+        contentDiv.append(span);
+    }
+
+    return contentDiv;
 }
 
 
