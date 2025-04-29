@@ -73,11 +73,11 @@ button:hover {
 
 
 #formed {
-    width:30vw;
+    width:fit-content;
     background-color:#364153;
     text-align: center;
     height:fit-content;
-    padding:1em;
+    padding:3em;
     position: fixed;
     top:40%;
     left:50%;
