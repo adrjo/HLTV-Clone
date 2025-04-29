@@ -24,7 +24,7 @@ export function submitPost(event) {
 
     try {
         if (localStorage.getItem("posts") != null) {
-            posts = JSON.parse(localStorage.getItem("posts"));
+            posts = getPosts();
         }
 
         posts.push(post);
@@ -41,11 +41,65 @@ export function submitPost(event) {
     }
 }
 
-
-
 //TODO: load posts from api instead of localstorage
+export function getPosts() {
+    return JSON.parse(localStorage.getItem("posts"));
+}
+
+export function getPost(postId) {
+    const posts = getPosts();
+
+    for (const post of posts) {
+        if (post.id == postId) {
+            return post;
+        }
+    }
+    return null;
+}
+
+
+export function renderPost(post) {
+    const contentContainer = document.getElementById("content");
+
+    let articleContainer = document.createElement("div");
+    articleContainer.classList.add("article", "mr-1", "mb-5");
+
+    let title = document.createElement("h1");
+    title.append(post.title);
+    title.classList.add("uppercase", "font-extrabold", "text-4xl", "mt-1.5", "pb-2");
+
+    let authorDate = document.createElement("div");
+    authorDate.classList.add("flex");
+
+    let author = document.createElement("small");
+    author.append(post.author);
+
+    let date = document.createElement("small");
+    date.classList.add("mr-0", "text-right", "m-auto");
+    let formattedDate = new Date(post.date);
+    date.append(formattedDate.toDateString());
+
+    authorDate.append(author, date);
+
+    /*let img = document.createElement("img");
+    img.src = post.imgLink;
+    img.classList.add("border-black-1", "p-4");*/
+
+    const content = createContentSection(post.content);
+
+    articleContainer.append(title, authorDate, content);
+
+    contentContainer.prepend(articleContainer);
+}
+
+// automatically split sections up into spans via newline chars, automatic links, create lists via star * and -, make bold/italic via [b]/[i] codes, maybe [spoiler] tag support too?
+function createContentSection(contentData) {
+    console.log(contentData);
+}
+
+
 export function renderPosts() {
-    const posts = JSON.parse(localStorage.getItem("posts"));
+    const posts = getPosts();
 
     const postsContainer = document.getElementById("content");
 
@@ -101,7 +155,7 @@ function createDateHeading(postDate) {
 
 function createPost(post) {
     let container = document.createElement("a");
-    container.href = "article/" + post.id;
+    container.href = "article?id=" + post.id;
     container.classList.add("news-button", "bg-gray-700", "flex", "gap-2", "items-center", "shadow-2xs", "mb-0.5");
 
     let h2 = document.createElement("h2");
