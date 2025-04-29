@@ -73,7 +73,8 @@ button:hover {
 
 
 #formed {
-    width:fit-content;
+    width:100%;
+    max-width: 30rem;
     background-color:#364153;
     text-align: center;
     height:fit-content;
@@ -93,7 +94,9 @@ button:hover {
 #formed :nth-child(n) {
     padding: 0.25rem;
     margin: auto;
-    width: 20rem;
+
+    width: 100%;
+    max-width: 20rem;
 }
 
 #formed :not(button) {
@@ -161,5 +164,8 @@ button:hover {
 
     #formed {
         width: 100%;
+        padding-left: .25rem;
+        padding-right: .25rem;
+
     }
 }
