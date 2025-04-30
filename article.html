@@ -37,13 +37,22 @@
 
     <main id="content" class="bg-[#1b1f23] container-thing main">
 
-        <article>
+        <article class="flex flex-col">
             <div id="article-content"></div>
 
-            <div id="comments"></div>
+            <div id="comments">
+                <div>
+                    <div class="flex">
+                        <small>Author</small>
+                        <small class="mr-0 text-right m-auto">2025-04-30 17:30</small>
+                    </div>
+                    <span>My goat</span>
+                </div>
 
-            <textarea id="comment_content"></textarea>
-            <button id="submit_comment">Submit</button>
+            </div>
+
+            <textarea id="comment_content" class="bg-white text-black p-3" placeholder="Think before you type!" rows="5"></textarea>
+            <button id="submit_comment" class="bg-blue-400 mt-3 mb-3 w-30 p-2">Post</button>
         </article>
     
 

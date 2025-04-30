@@ -1,12 +1,17 @@
 import { getPost, renderPost } from "../posts";
+import { addComment, renderComments } from "../comments";
+
+
+const search = new URLSearchParams(window.location.search);
+
+let post = getPagePost(search);
+
+addClickEvent();
 
 tryLoadPost();
+tryLoadComments();
 
-
-function tryLoadPost() {
-    const search = new URLSearchParams(window.location.search);
-    const content = document.getElementById("content");
-    
+function getPagePost(search) {
     if (search.get("id") == null || search.get("id") == "") {
         content.textContent = "404 not found";
         return;
@@ -19,7 +24,29 @@ function tryLoadPost() {
         content.textContent = "404 not found";
         return;
     }
-    
+
+    return post;
+}
+
+function addClickEvent() {
+    if (post == undefined) return;
+
+    const submitButton = document.getElementById("submit_comment");
+
+    submitButton.addEventListener("click", (event) => addComment(event, post.id));
+}
+
+
+
+function tryLoadPost() {
+    if (post == undefined) return;
+    const content = document.getElementById("article-content");
     
     renderPost(post);
+}
+
+function tryLoadComments() {
+    if (post == undefined) return;
+
+    renderComments(post.id);
 }
