@@ -90,7 +90,7 @@ export function getPost(postId) {
 
 
 export function renderPost(post) {
-    const contentContainer = document.getElementById("content");
+    const contentContainer = document.getElementById("article-content");
 
     let articleContainer = document.createElement("div");
     articleContainer.classList.add("article", "flex-3/4", "mr-1", "mb-5");
@@ -125,7 +125,7 @@ export function renderPost(post) {
     }
     articleContainer.append(content);
 
-    contentContainer.prepend(articleContainer);
+    contentContainer.append(articleContainer);
 }
 
 // automatically split sections up into spans via newline chars, automatic links, create lists via star * and -, make bold/italic via [b]/[i] codes, maybe [spoiler] tag support too?
