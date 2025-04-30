@@ -1,4 +1,4 @@
-import { hideForm } from "./forms";
+import { deletePostForm, hideForm } from "./forms";
 import { clearForms, displayToast, getElapsedTimeFormatted, createFaIconSolid } from "./utils";
 
 
@@ -34,7 +34,7 @@ export function submitPost(event) {
 
         posts.push(post);
 
-        localStorage.setItem("posts", JSON.stringify(posts));
+        savePosts(posts);
 
         // clear and hide the form
         clearForms(title, author, imgLink, content);
@@ -49,6 +49,10 @@ export function submitPost(event) {
 //TODO: load posts from api instead of localstorage
 export function getPosts() {
     return JSON.parse(localStorage.getItem("posts"));
+}
+
+function savePosts(posts) {
+    localStorage.setItem("posts", JSON.stringify(posts));
 }
 
 export function getPost(postId) {
@@ -203,8 +207,11 @@ function createPost(post) {
     let editIcon = createFaIconSolid("fa-pen-to-square");
     deleteB.append(crossIcon);
     deleteB.title = "Remove post";
+    deleteB.onclick = () => deletePostForm(post.id);
+
     editB.append(editIcon);
     editB.title = "Edit post";
+    editB.onclick = () => editPostForm(post.id);
 
     let h2 = document.createElement("h2");
     h2.append(post.title);
@@ -217,6 +224,21 @@ function createPost(post) {
 
     container.append(h2, meta);
     return container;
+}
+
+export function removePost(id) {
+    try {
+        console.log("deleting id=" + id);
+
+        let posts = getPosts();
+        posts = posts.filter(post => post.id != id);
+
+        savePosts(posts);
+        renderPosts();
+    } catch(error) {
+        return false;
+    }
+    return true; // successfully deleted post
 }
 
 function createMeta(post) {

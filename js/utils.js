@@ -4,7 +4,7 @@ export function clearForms(...forms) {
     }
 }
 
-export async function displayToast(toastMessage, displaySeconds) {
+export async function displayToast(toastMessage, displaySeconds = 5) {
     const toastsContainer = document.getElementById("toastsContainer");
 
     let newToast = createToast(toastMessage);
