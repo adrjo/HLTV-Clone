@@ -55,3 +55,10 @@ export function createFaIconSolid(faName) {
 
     return icon;
 }
+
+// manual uuids cause crypto.randomUUID() only works on HTTPS and i wanna be able to test on mobile natively :D
+export function generateUUID() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }

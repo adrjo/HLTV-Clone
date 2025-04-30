@@ -1,8 +1,8 @@
-import { clearForms } from "./utils";
+import { clearForms, generateUUID } from "./utils";
 
 class Comment {
     constructor(content, postId) {
-        this.id = crypto.randomUUID();
+        this.id = generateUUID();
         this.content = content;
         this.author = "Anonymous"; //todo
         this.date = Date.now();
@@ -15,8 +15,6 @@ export function addComment(event, postId) {
     let content = document.getElementById("comment_content");
 
     let comment = new Comment(content.value, postId);
-    console.log(comment);
-
 
     clearForms(content);
     
@@ -61,7 +59,6 @@ export function renderComments(postId) {
     const comments = getComments()
     .filter(comment => comment.postId == postId)                
     .sort((a,b) => a.date > b.date);
-    console.log(comments);
 
     for (const comment of comments) {
         let container = document.createElement("div");

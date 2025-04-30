@@ -1,12 +1,12 @@
 import { deletePostForm, editPostForm, hideForm } from "./forms";
-import { clearForms, displayToast, getElapsedTimeFormatted, createFaIconSolid } from "./utils";
+import { clearForms, displayToast, getElapsedTimeFormatted, createFaIconSolid, generateUUID } from "./utils";
 
 
 let editModeEnabled = false;
 
 export class Post {
     constructor(title, imgLink, author, content) {
-        this.id = crypto.randomUUID(); // TODO: when API: get id from database
+        this.id = generateUUID(); // TODO: when API: get id from database
         this.title = title;
         this.imgLink = imgLink;
         this.author = author;
