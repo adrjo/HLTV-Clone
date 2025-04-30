@@ -202,7 +202,9 @@ function createPost(post) {
     let crossIcon = createFaIconSolid("fa-xmark");
     let editIcon = createFaIconSolid("fa-pen-to-square");
     deleteB.append(crossIcon);
+    deleteB.title = "Remove post";
     editB.append(editIcon);
+    editB.title = "Edit post";
 
     let h2 = document.createElement("h2");
     h2.append(post.title);
@@ -212,7 +214,7 @@ function createPost(post) {
     if (editModeEnabled) {
         container.append(editB, deleteB);
     }
-    
+
     container.append(h2, meta);
     return container;
 }

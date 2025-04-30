@@ -117,6 +117,14 @@ button:hover {
     background-color: #364153;
 }
 
+.fa-xmark:hover {
+    color:red;
+}
+
+.fa-pen-to-square:hover {
+    color:#1b1f23;
+}
+
 
 @media (min-width: 768px) {
     .container-thing {
