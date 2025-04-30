@@ -32,17 +32,8 @@ export function submitPost(event) {
 
     let post = new Post(title.value, imgLink.value, author.value, content.value);
 
-    //TODO: replace with call to API to save a post.
-    let posts = [];
-
     try {
-        if (localStorage.getItem("posts") != null) {
-            posts = getPosts();
-        }
-
-        posts.push(post);
-
-        savePosts(posts);
+        savePost(post);
 
         // clear and hide the form
         clearForms(title, author, imgLink, content);
@@ -58,9 +49,7 @@ export function updatePost(postId, post) {
     try {
         removePost(postId);
 
-        let posts = getPosts();
-        posts.push(post);
-        savePosts(posts);
+        savePost(post);
         toggleEditMode();
     } catch(error) {
         return false;
@@ -70,9 +59,22 @@ export function updatePost(postId, post) {
 
 //TODO: load posts from api instead of localstorage
 export function getPosts() {
-    return JSON.parse(localStorage.getItem("posts"));
+    let posts = localStorage.getItem("posts");
+
+    if (posts == null) {
+        return [];
+    }
+    return JSON.parse(posts);
 }
 
+function savePost(post) {
+    let posts = getPosts();
+    posts.push(post);
+
+    savePosts(posts);
+}
+
+//TODO: replace with call to API to save a post.
 function savePosts(posts) {
     localStorage.setItem("posts", JSON.stringify(posts));
 }
