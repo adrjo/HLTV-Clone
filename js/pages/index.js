@@ -1,9 +1,12 @@
 import { displayForm, hideForm } from "../forms.js";
-import { submitPost, renderPosts } from "../posts.js";
+import { submitPost, renderPosts, toggleEditMode } from "../posts.js";
 
 // New post
 const newPostButton = document.getElementById("new_post");
 newPostButton.addEventListener("click", displayForm);
+
+const editModeButton = document.getElementById("edit_mode");
+editModeButton.addEventListener("click", toggleEditMode);
 
 
 const cancelButton = document.getElementById("cancel");

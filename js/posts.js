@@ -1,5 +1,8 @@
 import { hideForm } from "./forms";
-import { clearForms, displayToast, getElapsedTimeFormatted } from "./utils";
+import { clearForms, displayToast, getElapsedTimeFormatted, createFaIconSolid } from "./utils";
+
+
+let editModeEnabled = false;
 
 class Post {
     constructor(title, imgLink, author, content) {
@@ -189,17 +192,28 @@ function createDateHeading(postDate) {
 */
 
 function createPost(post) {
-    let container = document.createElement("a");
+    let container = document.createElement((editModeEnabled ? "div" : "a"));
     container.href = "article?id=" + post.id;
     container.classList.add("news-button", "bg-gray-700", "flex", "gap-2", "items-center", "shadow-2xs", "mb-0.5");
 
+    let editB = document.createElement("button");
+    let deleteB = document.createElement("button");
+
+    let crossIcon = createFaIconSolid("fa-xmark");
+    let editIcon = createFaIconSolid("fa-pen-to-square");
+    deleteB.append(crossIcon);
+    editB.append(editIcon);
+
     let h2 = document.createElement("h2");
     h2.append(post.title);
-    container.append(h2);
 
     let meta = createMeta(post);
-    container.append(meta);
 
+    if (editModeEnabled) {
+        container.append(editB, deleteB);
+    }
+    
+    container.append(h2, meta);
     return container;
 }
 
@@ -226,4 +240,11 @@ function createMeta(post) {
 
     meta.append(commentsCount, date);
     return meta;
+}
+
+export function toggleEditMode(event) {
+    editModeEnabled = !editModeEnabled;
+
+    // render posts again with/without edit mode buttons
+    renderPosts();
 }

@@ -48,3 +48,10 @@ export function getElapsedTimeFormatted(timeSince) {
         return ret += " ago";
     }
 }
+
+export function createFaIconSolid(faName) {
+    let icon = document.createElement("i");
+    icon.classList.add("fa-solid", faName);
+
+    return icon;
+}
