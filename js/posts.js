@@ -1,10 +1,10 @@
-import { deletePostForm, hideForm } from "./forms";
+import { deletePostForm, editPostForm, hideForm } from "./forms";
 import { clearForms, displayToast, getElapsedTimeFormatted, createFaIconSolid } from "./utils";
 
 
 let editModeEnabled = false;
 
-class Post {
+export class Post {
     constructor(title, imgLink, author, content) {
         this.id = crypto.randomUUID(); // TODO: when API: get id from database
         this.title = title;
@@ -12,6 +12,14 @@ class Post {
         this.author = author;
         this.content = content;
         this.date = Date.now();
+    }
+
+
+    static createFullPost(id, title, imgLink, author, content, date) {
+        const post = new Post(title, imgLink, author, content);
+        post.id = id;
+        post.date = date;
+        return post;
     }
 }
 
@@ -44,6 +52,20 @@ export function submitPost(event) {
     } catch(error) {
         displayToast("❌ Error creating post", 5);
     }
+}
+
+export function updatePost(postId, post) {
+    try {
+        removePost(postId);
+
+        let posts = getPosts();
+        posts.push(post);
+        savePosts(posts);
+        toggleEditMode();
+    } catch(error) {
+        return false;
+    }
+    return true;
 }
 
 //TODO: load posts from api instead of localstorage
