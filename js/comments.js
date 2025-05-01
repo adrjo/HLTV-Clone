@@ -57,8 +57,8 @@ export function renderComments(postId) {
     commentsContainer.innerHTML = "";
 
     const comments = getComments()
-    .filter(comment => comment.postId == postId)                
-    .sort((a,b) => a.date > b.date);
+        .filter(comment => comment.postId == postId)                
+        .sort((a,b) => a.date > b.date);
 
     for (const comment of comments) {
         let container = document.createElement("div");
@@ -81,4 +81,10 @@ export function renderComments(postId) {
 
         commentsContainer.append(container);
     }
+}
+
+export function getCommentCount(postId) {
+    return getComments()
+        .filter(comment => comment.postId == postId)
+        .length;
 }

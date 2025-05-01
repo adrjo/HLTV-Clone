@@ -1,3 +1,4 @@
+import { getCommentCount } from "./comments";
 import { deletePostForm, editPostForm, hideForm } from "./forms";
 import { clearForms, displayToast, getElapsedTimeFormatted, createFaIconSolid, generateUUID } from "./utils";
 
@@ -270,7 +271,9 @@ function createMeta(post) {
     meta.classList.add("news-info", "m-auto", "mr-0", "text-xs");
 
     let commentsCount = document.createElement("p");
-    commentsCount.append(0 + " comments"); //todo
+    const count = getCommentCount(post.id);
+
+    commentsCount.append(count + " comments");
 
     let date = document.createElement("p");
     let dateObj = new Date(post.date);
