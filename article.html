@@ -38,7 +38,18 @@
     <main id="content" class="bg-[#1b1f23] container-thing main">
 
         <article class="flex flex-col">
-            <div id="article-content"></div>
+            <div id="article-content" class="border-b"></div>
+
+            <div id="feedback" class="flex w-fit text-gray-700 bg-blue-50 rounded-2xl mt-3 mb-3 m-auto">
+                <button id="like" class="flex items-center p-3 rounded-2xl hover:bg-green-400">
+                    <i class="fa-solid fa-plus mr-1"></i>
+                    <p id="likeCount">0</p>
+                </button>
+                <button id="dislike" class="flex items-center p-3 mr-0 text-right m-auto rounded-2xl hover:bg-red-400">
+                    <p id="dislikeCount">0</p>
+                    <i class="fa-solid fa-minus ml-1"></i>
+                </button>
+            </div>
 
             <div id="comments">
                 <div>

@@ -1,14 +1,16 @@
 import { getPost, renderPost } from "../posts";
 import { addComment, renderComments } from "../comments";
+import { renderFeedback, likePost, dislikePost } from "../feedback";
 
 
 const search = new URLSearchParams(window.location.search);
 
 let post = getPagePost(search);
 
-addClickEvent();
+addClickEvents();
 
 tryLoadPost();
+tryLoadFeedback();
 tryLoadComments();
 
 function getPagePost(search) {
@@ -28,21 +30,31 @@ function getPagePost(search) {
     return post;
 }
 
-function addClickEvent() {
+function addClickEvents() {
     if (post == undefined) return;
 
     const submitButton = document.getElementById("submit_comment");
-
     submitButton.addEventListener("click", (event) => addComment(event, post.id));
+
+    const likeButton = document.getElementById("like");
+    likeButton.addEventListener("click", (event) => likePost(event, post.id));
+
+    const dislikeButton = document.getElementById("dislike");
+    dislikeButton.addEventListener("click", (event) => dislikePost(event, post.id));
 }
 
 
 
 function tryLoadPost() {
     if (post == undefined) return;
-    const content = document.getElementById("article-content");
     
     renderPost(post);
+}
+
+function tryLoadFeedback() {
+    if (post == undefined) return;
+
+    renderFeedback(post.id);
 }
 
 function tryLoadComments() {
