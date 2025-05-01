@@ -32,7 +32,8 @@
 }
 
 #comments span {
-    padding: 1rem;
+    padding: 0 1rem;
+    display: inline-block;
 }
 
 #comments .flex {
