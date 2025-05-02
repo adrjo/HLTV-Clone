@@ -1,6 +1,7 @@
-import { getCommentCount } from "./comments";
+import { getCommentCount, removeComments } from "./comments";
 import { deletePostForm, editPostForm, hideForm } from "./forms";
 import { clearForms, displayToast, getElapsedTimeFormatted, createFaIconSolid, generateUUID } from "./utils";
+import { removeFeedback } from "./feedback";
 
 
 let editModeEnabled = false;
@@ -43,6 +44,7 @@ export function submitPost(event) {
         renderPosts();
     } catch(error) {
         displayToast("❌ Error creating post", 5);
+        console.log(error);
     }
 }
 
@@ -96,7 +98,7 @@ export function renderPost(post) {
     const contentContainer = document.getElementById("article-content");
 
     let articleContainer = document.createElement("div");
-    articleContainer.classList.add("article", "flex-3/4", "mr-1", "mb-5");
+    articleContainer.classList.add("article", "mr-1", "mb-5");
 
     let title = document.createElement("h1");
     title.append(post.title);
@@ -259,8 +261,14 @@ export function removePost(id) {
         posts = posts.filter(post => post.id != id);
 
         savePosts(posts);
+
+        // cleanup comments and likes
+        removeComments(id);
+        removeFeedback(id)
+        // update renderlist
         renderPosts();
     } catch(error) {
+        console.log(error);
         return false;
     }
     return true; // successfully deleted post

@@ -47,6 +47,7 @@ function removeLikes(postId) {
     saveAllLikes(likes);
 }
 
+//shared
 
 class Likes {
     constructor(postId, amt) {
@@ -55,7 +56,6 @@ class Likes {
     }
 }
 
-//shared
 
 export function renderFeedback(postId) {
     let likeCounter = document.getElementById("likeCount");
@@ -64,6 +64,16 @@ export function renderFeedback(postId) {
 
     let dislikeCounter = document.getElementById("dislikeCount");
     dislikeCounter.textContent = getDislikes(postId);
+}
+
+export function removeFeedback(postId) {
+    let likes = getAllLikes()
+        .filter(like => like.postId != postId);
+    saveAllLikes(likes);
+
+    let dislikes = getAllDislikes()
+        .filter(like => like.postId != postId);
+    saveAllDislikes(dislikes);
 }
 
 //DISLIKES todo: maybe combine, this is all duped code :D

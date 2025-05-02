@@ -42,6 +42,13 @@ function saveComments(comments) {
     localStorage.setItem("comments", JSON.stringify(comments));
 }
 
+export function removeComments(postId) {
+    let comments = getComments()
+        .filter(comment => comment.postId != postId);
+
+        saveComments(comments);
+}
+
 
 /*
                 <div>
