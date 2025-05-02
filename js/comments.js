@@ -82,7 +82,17 @@ export function renderComments(postId) {
         metaContainer.append(author, date);
 
         let content = document.createElement("span");
-        content.append(comment.content);
+
+        if (comment.content.includes("\n")) { // single line breaks
+            let newLines = comment.content.split("\n");
+
+            for (const line of newLines) {
+                content.append(line);
+                content.append(document.createElement("br"));
+            }
+        } else {
+            content.append(comment.content);
+        }
 
         container.append(metaContainer, content);
 

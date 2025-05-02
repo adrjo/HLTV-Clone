@@ -253,26 +253,6 @@ function createPost(post) {
     return container;
 }
 
-export function removePost(id) {
-    try {
-        console.log("deleting id=" + id);
-
-        let posts = getPosts();
-        posts = posts.filter(post => post.id != id);
-
-        savePosts(posts);
-
-        // cleanup comments and likes
-        removeComments(id);
-        removeFeedback(id)
-        // update renderlist
-        renderPosts();
-    } catch(error) {
-        console.log(error);
-        return false;
-    }
-    return true; // successfully deleted post
-}
 
 function createMeta(post) {
     let meta = document.createElement("div");
@@ -306,4 +286,25 @@ export function toggleEditMode(event) {
 
     // render posts again with/without edit mode buttons
     renderPosts();
+}
+
+export function removePost(id) {
+    try {
+        console.log("deleting id=" + id);
+
+        let posts = getPosts();
+        posts = posts.filter(post => post.id != id);
+
+        savePosts(posts);
+
+        // cleanup comments and likes
+        removeComments(id);
+        removeFeedback(id)
+        // update renderlist
+        renderPosts();
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
+    return true; // successfully deleted post
 }
