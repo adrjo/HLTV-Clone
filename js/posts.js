@@ -160,10 +160,65 @@ function createContentSection(contentData) {
         } else {
             span.append(section);
         }
-        contentDiv.append(span);
+
+        let styled = inlineStyling(span);
+        contentDiv.append(styled);
     }
 
     return contentDiv;
+}
+
+function inlineStyling(span) {
+    let content = span.innerHTML; // Use innerHTML to preserve any existing HTML
+    
+    // Process spoiler tags first (since they might contain other formatting)
+    content = processTag(content, 'spoiler', (text) => {
+        const spoiler = document.createElement('spoiler');
+        spoiler.textContent = text;
+        return spoiler.outerHTML;
+    });
+    
+    // Process bold tags
+    content = processTag(content, 'b', (text) => {
+        return `<strong>${text}</strong>`;
+    });
+    
+    // Process italic tags
+    content = processTag(content, 'i', (text) => {
+        return `<em>${text}</em>`;
+    });
+    
+    // Create a new span and set the processed content
+    const newSpan = document.createElement('span');
+    newSpan.innerHTML = content;
+    return newSpan;
+}
+
+function processTag(content, tagName, createElement) {
+    const openTag = `[${tagName}]`;
+    const closeTag = `[/${tagName}]`;
+    const parts = content.split(openTag);
+    
+    if (parts.length === 1) return content; // No tags found
+    
+    let result = parts[0];
+    
+    for (let i = 1; i < parts.length; i++) {
+        const part = parts[i];
+        const closeIndex = part.indexOf(closeTag);
+        
+        if (closeIndex === -1) {
+            // No closing tag found, treat as plain text
+            result += openTag + part;
+        } else {
+            const taggedContent = part.substring(0, closeIndex);
+            const remainingContent = part.substring(closeIndex + closeTag.length);
+            
+            result += createElement(taggedContent) + remainingContent;
+        }
+    }
+    
+    return result;
 }
 
 

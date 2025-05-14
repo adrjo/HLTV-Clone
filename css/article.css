@@ -40,6 +40,15 @@
     border-bottom: 1px solid #1b1f23;
 }
 
+spoiler {
+    color:black;
+    background-color: black;
+}
+
+spoiler:hover {
+    color:white;
+}
+
 @media screen and (max-width: 500px) {
     .article img {
         display: none;
